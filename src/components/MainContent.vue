@@ -4,9 +4,8 @@
       <div class="col-lg-5 col-md-12 col-sm-12">
         <news></news>
       </div>
-      <div class="col">
-      </div>
-      <div class="col-lg-5 col-md-12 col-sm-12">
+
+      <div class="col-lg-7 col-md-12 col-sm-12">
         <economics></economics>
         <weather></weather>
       </div>
