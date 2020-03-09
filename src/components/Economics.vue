@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="container mt-5">
+    <h2 class="d-flex justify-content-center">Currency Exchange</h2>
     <div class="row">
       <div class="col-4 align-self-center">
         <h5>1 US dollar is equal to</h5>
@@ -89,7 +90,8 @@ export default {
         });
     },
     toDateString(date) {
-      const d = new Date(date);
+      // eslint-disable-next-line
+      const d = new Date(date.replace(/-/g, '\/'));
       return d.toDateString();
     },
   },

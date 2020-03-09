@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <perfect-scrollbar>
+      <h2 class="d-flex justify-content-center">Top News</h2>
       <ul class="list-unstyled">
         <li v-for="(item, x) in news" :key="x">
           <b-media tag="li" class="my-4 border item"
