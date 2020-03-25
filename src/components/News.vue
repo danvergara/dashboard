@@ -27,7 +27,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'NewsITem',
+  name: 'News',
   data() {
     return {
       news: [],
@@ -43,7 +43,7 @@ export default {
         })
         .catch((error) => {
           // eslint-disable-next-line
-          console.error(error);
+          console.error(error.message);
         });
     },
     redirect(url) {

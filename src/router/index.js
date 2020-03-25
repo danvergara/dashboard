@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Home from '../views/Home.vue';
-// import Books from '../components/Books.vue';
-import Ping from '../components/Ping.vue';
 import AppNavigation from '../components/AppNavigation.vue';
 
 Vue.use(VueRouter);
@@ -25,11 +22,6 @@ const routes = [
     path: '/',
     name: 'AppNavigation',
     component: AppNavigation,
-  },
-  {
-    path: '/ping',
-    name: 'Ping',
-    component: Ping,
   },
 ];
 
