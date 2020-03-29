@@ -1,0 +1,27 @@
+name: Build and test dashboard frontent app
+on: [push, pull_request]
+jobs:
+  build:
+      name: Build
+      runs-on: ${{ matrix.os }}
+      strategy:
+        matrix:
+          os: [ubuntu-latest, macos-latest]
+          node-version: [12.x]
+      steps:
+        - name: Check out source code
+          uses: actions/checkout@v2
+
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+
+        - name: install dependencies
+          run: npm install
+
+        - name: run unit tests
+          run: npm run test:unit
+
+        - name: run linter
+          run: npm run lint
