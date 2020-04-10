@@ -31,11 +31,12 @@ export default {
   data() {
     return {
       news: [],
+      DASHBOARD_SERVER_URL: process.env.DASHBOARD_SERVER_URL,
     };
   },
   methods: {
     getNews() {
-      const path = 'http://0.0.0.0:8000/v1/top-news';
+      const path = `${this.DASHBOARD_SERVER_URL}/v1/top-news`;
 
       axios.get(path)
         .then((res) => {
