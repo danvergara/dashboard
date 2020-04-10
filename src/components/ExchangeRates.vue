@@ -40,6 +40,7 @@ export default {
           data: [],
         }],
       },
+      DASHBOARD_SERVER_URL: process.env.DASHBOARD_SERVER_URL,
     };
   },
   components: {
@@ -47,7 +48,7 @@ export default {
   },
   methods: {
     getExchangeRates() {
-      const path = 'http://0.0.0.0:8000/v1/historical-currency-rates';
+      const path = `${this.DASHBOARD_SERVER_URL}/v1/historical-currency-rates`;
 
       axios.get(path)
         .then((res) => {

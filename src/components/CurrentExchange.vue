@@ -20,11 +20,13 @@ export default {
         base: '',
         date: '',
       },
+      DASHBOARD_SERVER_URL: process.env.DASHBOARD_SERVER_URL,
     };
   },
   methods: {
     getCurrentExchange() {
-      const path = 'http://0.0.0.0:8000/v1/currency-exchange';
+      const path = `${this.DASHBOARD_SERVER_URL}/v1/currency-exchange`;
+
       axios.get(path)
         .then((res) => {
           this.currency.rates.MXN = res.data['currency-exchange'].rates.MXN;

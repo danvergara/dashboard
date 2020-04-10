@@ -55,11 +55,12 @@ export default {
         name: '',
         cod: 0,
       },
+      DASHBOARD_SERVER_URL: process.env.DASHBOARD_SERVER_URL,
     };
   },
   methods: {
     getWeather() {
-      const path = 'http://0.0.0.0:8000/v1/current-weather';
+      const path = `${this.DASHBOARD_SERVER_URL}/v1/current-weather`;
 
       axios.get(path)
         .then((res) => {
