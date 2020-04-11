@@ -20,12 +20,12 @@ export default {
         base: '',
         date: '',
       },
-      DASHBOARD_SERVER_URL: process.env.DASHBOARD_SERVER_URL,
+      VUE_APP_DASHBOARD_SERVER_URL: process.env.VUE_APP_DASHBOARD_SERVER_URL,
     };
   },
   methods: {
     getCurrentExchange() {
-      const path = `${this.DASHBOARD_SERVER_URL}/v1/currency-exchange`;
+      const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/currency-exchange`;
 
       axios.get(path)
         .then((res) => {
