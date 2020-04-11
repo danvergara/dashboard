@@ -40,7 +40,7 @@ export default {
           data: [],
         }],
       },
-      DASHBOARD_SERVER_URL: process.env.DASHBOARD_SERVER_URL,
+      VUE_APP_DASHBOARD_SERVER_URL: process.env.VUE_APP_DASHBOARD_SERVER_URL,
     };
   },
   components: {
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getExchangeRates() {
-      const path = `${this.DASHBOARD_SERVER_URL}/v1/historical-currency-rates`;
+      const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/historical-currency-rates`;
 
       axios.get(path)
         .then((res) => {
