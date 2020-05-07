@@ -1,7 +1,10 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" id="navbar-personal">
-      <b-navbar-brand href="#">Wachtower project</b-navbar-brand>
+      <b-navbar-brand href="#">
+        <img alt="wp" src="../assets/bento.png" height="42" width="42">
+        Wachtower project
+      </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
