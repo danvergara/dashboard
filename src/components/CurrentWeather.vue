@@ -76,7 +76,7 @@ export default {
       return date.toDateString();
     },
     getIcon(icon) {
-      const urlIcon = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+      const urlIcon = `https://openweathermap.org/img/wn/${icon}@2x.png`;
       return urlIcon;
     },
   },
