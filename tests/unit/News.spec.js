@@ -20,7 +20,7 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
             source: {
               name: 'Merca20.com',
             },
-            author: '',
+            author: 'Verónica Malo Guzmán',
             title: 'Jeff Bezos publica una carta por el COVID-19',
             description: 'Dar certdiumbre a los empleados en momentos...',
             url: 'https://www.merca20.com/jeff-bezos-publica-una-carta-por-el-covid-19-y-es-una-gran-leccion-para-ti-que-eres-lider/',
@@ -105,6 +105,9 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
     expect(wrapper.findAll('li').length).toBeGreaterThan(1);
     expect(wrapper.findAll('b-media').length).toBeGreaterThan(1);
     expect(wrapper.findAll('h5').at(0).text()).toMatch('Jeff Bezos publica una carta por el COVID-19');
+    expect(wrapper.findAll('p').at(0).text()).toContain('Merca20.com');
+    expect(wrapper.findAll('p').at(0).text()).toContain('Verónica Malo Guzmán');
+    expect(wrapper.findAll('p').at(0).text()).toContain('Sun Mar 22 2020');
     expect(wrapper.findAll('p').at(1).text()).toMatch('Dar certdiumbre a los empleados en momentos...');
   });
 });
