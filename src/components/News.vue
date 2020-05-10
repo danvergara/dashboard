@@ -4,19 +4,24 @@
       <h2 class="d-flex justify-content-center">Top News</h2>
       <ul class="list-unstyled">
         <li v-for="(item, x) in news" :key="x">
-          <b-media tag="li" class="my-4 border item"
-                   vertical-align="center" @click="redirect(item.url)">
-            <template v-slot:aside>
-             <b-img :src="item.urlToImage" width="170" height="180" alt="Media Aside"></b-img>
-            </template>
+          <b-card no-body>
+            <b-media tag="li" class="m-2 item"
+                     vertical-align="center"
+                     @click.stop.prevent="redirect(item.url)">
+              <template v-slot:aside>
+               <b-img :src="item.urlToImage" width="170" height="180" alt="Media Aside"></b-img>
+              </template>
 
-              <h5 class="mt-0 mb-1">{{item.title}}</h5>
-              <p><strong>Author: </strong>{{item.author}}<br>
-                 <strong>Published at: </strong>{{item.publishedAt}}</p>
-              <p class="mb-0">
-                {{item.description}}
-              </p>
-          </b-media>
+                <h5 class="mt-0 mb-1">{{item.title}}</h5>
+                <p><strong>Source: </strong>{{item.source.name}}<br>
+                   <strong>Published at: </strong>{{toDateString(item.publishedAt)}}<br>
+                   <strong v-if="item.author">Author: </strong>{{item.author}}
+                 </p>
+                <p class="mb-0">
+                  {{item.description}}
+                </p>
+            </b-media>
+          </b-card>
         </li>
       </ul>
     </perfect-scrollbar>
@@ -48,7 +53,11 @@ export default {
         });
     },
     redirect(url) {
-      window.location = url;
+      window.open(url, '_blank');
+    },
+    toDateString(date) {
+      const dateObj = new Date(date);
+      return dateObj.toDateString();
     },
   },
   created() {
