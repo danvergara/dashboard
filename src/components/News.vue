@@ -12,14 +12,14 @@
                <b-img :src="item.urlToImage" width="170" height="180" alt="Media Aside"></b-img>
               </template>
 
-                <h5 class="mt-0 mb-1">{{item.title}}</h5>
-                <p><strong>Source: </strong>{{item.source.name}}<br>
-                   <strong>Published at: </strong>{{toDateString(item.publishedAt)}}<br>
-                   <strong v-if="item.author">Author: </strong>{{item.author}}
-                 </p>
-                <p class="mb-0">
-                  {{item.description}}
-                </p>
+              <h5 class="mt-0 mb-1">{{item.title}}</h5>
+              <p><strong>Source: </strong>{{item.source.name}}<br>
+                 <strong>Published at: </strong>{{toDateString(item.publishedAt)}}<br>
+                 <strong v-if="item.author">Author: </strong>{{item.author}}
+              </p>
+              <p class="mb-0">
+                {{item.description}}
+              </p>
             </b-media>
           </b-card>
         </li>
