@@ -1,6 +1,7 @@
 <template>
   <div class="" id="main-content">
-    <div class="row justify-content-md-center">
+    <navbar></navbar>
+    <div class="row justify-content-md-center" v-if="$auth.isAuthenticated">
       <div class="col-lg-5 col-md-12 col-sm-12">
         <news></news>
       </div>
@@ -10,10 +11,13 @@
         <weather></weather>
       </div>
     </div>
+    <default-view v-else></default-view>
   </div>
 </template>
 
 <script>
+import NavBar from './NavBar.vue';
+import DefaultView from './DefaultView.vue';
 import Economics from './Economics.vue';
 import News from './News.vue';
 import Weather from './Weather.vue';
@@ -23,6 +27,8 @@ export default {
     return {};
   },
   components: {
+    navbar: NavBar,
+    defaultView: DefaultView,
     economics: Economics,
     news: News,
     weather: Weather,

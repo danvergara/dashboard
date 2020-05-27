@@ -9,9 +9,8 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- <b-navbar-nav>
-          <b-nav-item href="#">Economics</b-nav-item>
-          <b-nav-item href="#">News</b-nav-item>
-          <b-nav-item href="#">Weather</b-nav-item>
+          <b-nav-item href="#">Finances</b-nav-item>
+          <b-nav-item href="#">Crypto</b-nav-item>
         </b-navbar-nav> -->
 
         <!-- Right aligned nav items -->
@@ -19,25 +18,32 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template v-slot:button-content>
-              <em>User</em>
+
+              <em v-if="!$auth.isAuthenticated">User</em>
+              <em v-if="$auth.isAuthenticated">{{ $auth.user.name }}</em>
             </template>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item v-if="!$auth.isAuthenticated" @click="login">Log in</b-dropdown-item>
+            <b-dropdown-item v-if="$auth.isAuthenticated" @click="logout">Log Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <main-content></main-content>
   </div>
 </template>
 <script>
-import MainContent from './MainContent.vue';
-
 export default {
   data() {
     return {};
   },
-  components: {
-    mainContent: MainContent,
+  methods: {
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin,
+      });
+    },
   },
 };
 </script>
