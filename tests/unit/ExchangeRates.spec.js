@@ -28,7 +28,17 @@ describe('Implementation test for ExchangeRates.vue with Successful HTTP GET', (
 
     axios.get.mockResolvedValue(responseGet);
 
-    wrapper = shallowMount(ExchangeRates);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(ExchangeRates, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -38,7 +48,11 @@ describe('Implementation test for ExchangeRates.vue with Successful HTTP GET', (
 
   it('does load the Exchange Rates data when a successful HTTP GET occurs', () => {
     expect(wrapper.name()).toMatch('ExchangeRates');
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/historical-currency-rates'));
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/historical-currency-rates'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     // Check the response object is properly set
     expect(wrapper.vm.response['2020-02-17'].MXN).toEqual(18.5734194739);
@@ -68,7 +82,17 @@ describe('Implementation Test for ExchangeRates.vue with Failed HTTP GET', () =>
   beforeEach(() => {
     axios.get.mockRejectedValue(new Error('BAD REQUEST'));
 
-    wrapper = shallowMount(ExchangeRates);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(ExchangeRates, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -78,7 +102,12 @@ describe('Implementation Test for ExchangeRates.vue with Failed HTTP GET', () =>
 
   it('does not load the current exchange rates data when failed HTTP GET occurs', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/historical-currency-rates'));
+
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/historical-currency-rates'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     // The response object must be empty
     expect(wrapper.vm.response).toEqual(expect.not.objectContaining({ '2020-02-17': { MXN: 18.5734194739 } }));

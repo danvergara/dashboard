@@ -1022,7 +1022,17 @@ describe('Implementation test for WeatheForecast.vue with Successful HTTP GET', 
 
     axios.get.mockResolvedValue(responseGet);
 
-    wrapper = shallowMount(WeatherForecast);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(WeatherForecast, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -1033,7 +1043,11 @@ describe('Implementation test for WeatheForecast.vue with Successful HTTP GET', 
   it('does load the Weather Forecast data when a successful HTTP GET occurs', () => {
     expect(wrapper.name()).toMatch('WeatherForecast');
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/weather-forecast'));
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/weather-forecast'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     // Check the news array is properly set
     expect(wrapper.vm.forecastResponse.list.length).toBeGreaterThan(0);
@@ -1064,7 +1078,17 @@ describe('Implementation Test for WeatherForecast.vue with Failed HTTP GET', () 
   beforeEach(() => {
     axios.get.mockRejectedValue(new Error('BAD REQUEST'));
 
-    wrapper = shallowMount(WeatherForecast);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(WeatherForecast, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -1074,7 +1098,11 @@ describe('Implementation Test for WeatherForecast.vue with Failed HTTP GET', () 
 
   it('does not load the top Weather Forecast data when failed HTTP GET occurs', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/weather-forecast'));
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/weather-forecast'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     // Check that the length of the forecastResponse array is equal to 0
     expect(wrapper.vm.forecastResponse.length).toEqual(0);

@@ -23,7 +23,17 @@ describe('Implementation Test for CurrentExchange.vue with Successful HTTP GET',
 
     axios.get.mockResolvedValue(responseGet);
 
-    wrapper = shallowMount(CurrentExchange);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(CurrentExchange, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -33,7 +43,12 @@ describe('Implementation Test for CurrentExchange.vue with Successful HTTP GET',
 
   it('does load the Current Exchange data when a successful HTTP GET occurs', () => {
     expect(wrapper.name()).toMatch('CurrentExchange');
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/currency-exchange'));
+
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/currency-exchange'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     // Check that 3 fields of data are properly set
     expect(wrapper.vm.currency.rates.MXN).toEqual(18.9966669753);
@@ -51,7 +66,17 @@ describe('Implementation Test for CurrentExchange.vue with Failed HTTP GET', () 
   beforeEach(() => {
     axios.get.mockRejectedValue(new Error('BAD REQUEST'));
 
-    wrapper = shallowMount(CurrentExchange);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(CurrentExchange, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -61,7 +86,12 @@ describe('Implementation Test for CurrentExchange.vue with Failed HTTP GET', () 
 
   it('does not load the current exchange data when a failed HTTP GET occurs', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/currency-exchange'));
+
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/currency-exchange'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     expect(wrapper.vm.currency.rates.MXN).toEqual(0.0);
     expect(wrapper.vm.currency.base).toMatch('');
