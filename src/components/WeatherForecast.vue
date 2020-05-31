@@ -35,10 +35,12 @@ export default {
     };
   },
   methods: {
-    getForecast() {
+    async getForecast() {
       const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/weather-forecast`;
+      const token = await this.$auth.getTokenSilently();
 
-      axios.get(path)
+      // send the access token through the 'Authorization' header
+      await axios.get(path, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           this.forecastResponse = res.data['weather-forecast'];
           this.forecastByDay();
