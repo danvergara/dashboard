@@ -81,7 +81,18 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
     };
 
     axios.get.mockResolvedValue(responseGet);
-    wrapper = shallowMount(News);
+
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(News, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -92,7 +103,9 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
   it('does load the News data when a successful HTTP GET occurs', () => {
     expect(wrapper.name()).toMatch('News');
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/top-news'));
+    expect(axios.get).toBeCalledWith(expect.stringMatching('/top-news'), {
+      headers: { Authorization: 'Bearer fake-token' },
+    });
 
     // Check the news array is properly set
 
@@ -118,7 +131,17 @@ describe('Implementation Test for News.vue with Failed HTTP GET', () => {
   beforeEach(() => {
     axios.get.mockRejectedValue(new Error('BAD REQUEST'));
 
-    wrapper = shallowMount(News);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(News, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -128,7 +151,9 @@ describe('Implementation Test for News.vue with Failed HTTP GET', () => {
 
   it('does not load the top news data when failed HTTP GET occurs', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/top-news'));
+    expect(axios.get).toBeCalledWith(expect.stringMatching('/top-news'), {
+      headers: { Authorization: 'Bearer fake-token' },
+    });
 
     // Check that the length of the news array is 0
     expect(wrapper.vm.news.length).toEqual(0);

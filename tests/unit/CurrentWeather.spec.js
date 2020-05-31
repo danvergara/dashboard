@@ -41,7 +41,17 @@ describe('Implementation test for CurrentWeather.vue with Successful HTTP GET', 
 
     axios.get.mockResolvedValue(responseGet);
 
-    wrapper = shallowMount(CurrentWeather);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(CurrentWeather, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   afterEach(() => {
@@ -52,7 +62,13 @@ describe('Implementation test for CurrentWeather.vue with Successful HTTP GET', 
   it('does load the Exchange Rates data when a successful HTTP GET occurs', () => {
     expect(wrapper.name()).toMatch('CurrentWeather');
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/current-weather'));
+
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/current-weather'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
+
 
     // Check that the weather data is properlyset
     expect(wrapper.vm.weather.weather[0].icon).toMatch('01n');
@@ -72,12 +88,27 @@ describe('Implementation Test for ExchangeRates.vue with Failed HTTP GET', () =>
   beforeEach(() => {
     axios.get.mockRejectedValue(new Error('BAD REQUEST'));
 
-    wrapper = shallowMount(CurrentWeather);
+    const $auth = {
+      getTokenSilently() {
+        return 'fake-token';
+      },
+    };
+
+    wrapper = shallowMount(CurrentWeather, {
+      mocks: {
+        $auth,
+      },
+    });
   });
 
   it('does not load the current exchange rates data when failed HTTP GET occurs', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toBeCalledWith(expect.stringMatching('/current-weather'));
+
+    expect(axios.get).toBeCalledWith(
+      expect.stringMatching('/current-weather'), {
+        headers: { Authorization: 'Bearer fake-token' },
+      },
+    );
 
     // Check that there is no weather data loaded when GET Request fails
     expect(wrapper.vm.weather.weather[0].icon).toMatch('');
