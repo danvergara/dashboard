@@ -24,10 +24,12 @@ export default {
     };
   },
   methods: {
-    getCurrentExchange() {
+    async getCurrentExchange() {
       const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/currency-exchange`;
+      const token = await this.$auth.getTokenSilently();
 
-      axios.get(path)
+      // send the access token through the 'Authorization' header
+      await axios.get(path, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           this.currency.rates.MXN = res.data['currency-exchange'].rates.MXN;
           this.currency.base = res.data['currency-exchange'].base;

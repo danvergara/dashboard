@@ -47,10 +47,12 @@ export default {
     highchart: Chart,
   },
   methods: {
-    getExchangeRates() {
+    async getExchangeRates() {
       const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/historical-currency-rates`;
+      const token = await this.$auth.getTokenSilently();
 
-      axios.get(path)
+      // send the access token through the 'Authorization' header
+      await axios.get(path, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           this.response = res.data['historical-currency-rates'].rates;
 

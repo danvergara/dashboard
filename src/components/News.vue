@@ -40,10 +40,12 @@ export default {
     };
   },
   methods: {
-    getNews() {
+    async getNews() {
       const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/top-news`;
+      const token = await this.$auth.getTokenSilently();
 
-      axios.get(path)
+      // send the access token through the 'Authorization' header
+      await axios.get(path, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           this.news = res.data.news;
         })
