@@ -5,7 +5,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 
 // Define a default action to perform after authentication
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
-  {}, document.title, '/dashboard',
+  {}, document.title, process.env.VUE_APP_CALLBACK,
 );
 
 let instance;
