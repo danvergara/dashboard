@@ -5,7 +5,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 
 // Define a default action to perform after authentication
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState(
-  {}, document.title, window.location.pathname,
+  {}, document.title, '/dashboard',
 );
 
 let instance;
@@ -16,7 +16,7 @@ export const getInstance = () => instance;
 // Create an instance of the Auth0 SDK. If one has already created, it returns that instance
 export const useAuth0 = ({
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
-  redirectUri = window.location.origin,
+  redirectUri = process.env.VUE_APP_CALLBACK,
   ...options
 }) => {
   if (instance) return instance;

@@ -1,7 +1,8 @@
 import { getInstance } from './index';
 
+
 // eslint-disable-next-line
-const authGuard = (to, from, next) => {
+export const authGuard = (to, from, next) => {
   const authService = getInstance();
   // eslint-disable-next-line
   const fn = () => {
@@ -27,5 +28,3 @@ const authGuard = (to, from, next) => {
     }
   });
 };
-
-export default authGuard;
