@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import BootstrapVue from 'bootstrap-vue';
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import PerfectScrollbar from 'vue2-perfect-scrollbar';
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css';
 import Vue from 'vue';
@@ -8,6 +8,7 @@ import router from './router';
 import { Auth0Plugin } from './auth';
 
 Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 Vue.use(PerfectScrollbar);
 
 Vue.config.productionTip = false;
