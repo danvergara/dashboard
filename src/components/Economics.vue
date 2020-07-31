@@ -1,16 +1,22 @@
 <template lang="html">
-  <div class="container mt-5">
-    <h2 class="d-flex justify-content-center">Currency Exchange</h2>
-    <div class="row">
-        <current-exchange></current-exchange>
-      <div class="col-8">
-        <exchange-rates></exchange-rates>
-      </div>
-    </div>
+  <div>
+    <navbar></navbar>
+    <h2 class="d-flex justify-content-center mt-4">Currency Exchange</h2>
+    <b-container class="mt-5">
+      <b-row align-v="center">
+        <b-col>
+          <current-exchange></current-exchange>
+        </b-col>
+        <b-col>
+          <exchange-rates></exchange-rates>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
+import NavBar from './NavBar.vue';
 import CurrentExchange from './CurrentExchange.vue';
 import ExchangeRates from './ExchangeRates.vue';
 
@@ -20,6 +26,7 @@ export default {
     };
   },
   components: {
+    navbar: NavBar,
     currentExchange: CurrentExchange,
     exchangeRates: ExchangeRates,
   },

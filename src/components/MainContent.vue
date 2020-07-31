@@ -1,5 +1,5 @@
 <template>
-  <div class="" id="main-content">
+  <div id="main-content">
     <navbar></navbar>
     <div class="row justify-content-md-center">
       <div class="col-lg-7 col-md-12 col-sm-12">

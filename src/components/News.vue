@@ -1,21 +1,22 @@
 <template>
   <div class="container">
+    <h2 class="d-flex justify-content-center">Top News</h2>
+    <br>
     <perfect-scrollbar>
-      <h2 class="d-flex justify-content-center">Top News</h2>
       <ul class="list-unstyled">
         <li v-for="(item, x) in news" :key="x">
           <b-card no-body>
             <b-media tag="li" class="m-2 item"
-                     vertical-align="center"
-                     @click.stop.prevent="redirect(item.url)">
+                              vertical-align="center"
+                              @click.stop.prevent="redirect(item.url)">
               <template v-slot:aside>
-               <b-img :src="item.urlToImage" width="170" height="180" alt="Media Aside"></b-img>
+                <b-img :src="item.urlToImage" width="170" height="180" alt="Media Aside"></b-img>
               </template>
 
               <h5 class="mt-0 mb-1">{{item.title}}</h5>
               <p><strong>Source: </strong>{{item.source.name}}<br>
-                 <strong>Published at: </strong>{{toDateString(item.publishedAt)}}<br>
-                 <strong v-if="item.author">Author: </strong>{{item.author}}
+                <strong>Published at: </strong>{{toDateString(item.publishedAt)}}<br>
+                <strong v-if="item.author">Author: </strong>{{item.author}}
               </p>
               <p class="mb-0">
                 {{item.description}}

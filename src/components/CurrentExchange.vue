@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="col-4 align-self-center">
+  <div class="align-self-center">
     <h5>1 US dollar is equal to</h5>
     <h2>{{ currency.rates.MXN.toFixed(2) }} mexican peso</h2>
     <p>{{ toDateString(currency.date) }}</p>
