@@ -9,3 +9,5 @@ services:
     environment:
       - NODE_ENV=development
       - VUE_APP_DASHBOARD_SERVER_URL=http://0.0.0.0:8000
+    volumes:
+      - ./:/app:z
