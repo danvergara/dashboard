@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MainContent from '../components/MainContent.vue';
+import Weather from '../components/Weather.vue';
+import Economics from '../components/Economics.vue';
 import Login from '../components/Login.vue';
 import { authGuard } from '../auth/authGuard';
 
@@ -16,6 +18,18 @@ const routes = [
     path: '/dashboard',
     name: 'MainContent',
     component: MainContent,
+    beforeEnter: authGuard,
+  },
+  {
+    path: '/weather',
+    name: 'Weather',
+    component: Weather,
+    beforeEnter: authGuard,
+  },
+  {
+    path: '/finances',
+    name: 'Finances',
+    component: Economics,
     beforeEnter: authGuard,
   },
 ];

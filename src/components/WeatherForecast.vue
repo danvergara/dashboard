@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="col-8">
+  <div>
     <h4 class="d-flex justify-content-center">Weather forecast</h4>
      <b-card-group>
        <b-card v-for="(day, key) in forecast" :key="key"
