@@ -12,37 +12,16 @@
     <perfect-scrollbar>
       <ul class="list-unstyled">
         <li v-for="(repo, x) in repositories" :key="x">
-          <div class="repo">
-            <b-card>
-              <template v-slot:header>
-                <a :href="repo.url" target="_blank">
-                  <h5><strong>{{repo.author}}/{{repo.name}}</strong></h5>
-                </a>
-              </template>
-              <b-media vertical-align="center">
-                <template v-slot:aside>
-                  <b-img :src="repo.avatar" width="50" height="50" alt="Media Aside"></b-img>
-                </template>
-                <b-card-text align="center">{{repo.description}}</b-card-text>
-              </b-media>
-              <template v-slot:footer>
-                <small class="text-muted">
-                  <svg height="30" width="30">
-                    <circle cx="15"
-                            cy="15"
-                            r="8"
-                            stroke="black"
-                            stroke-width="1"
-                            v-bind:fill="repo.languageColor" />
-                    Sorry, your browser does not support inline SVG.
-                  </svg>
-                  {{repo.language}}
-                  <span style="margin-left:1.5em"><b-icon icon="star"></b-icon></span>
-                  {{repo.stars}}
-                </small>
-              </template>
-            </b-card>
-          </div>
+          <repository
+            :url="repo.url"
+            :author="repo.author"
+            :name="repo.name"
+            :avatar="repo.avatar"
+            :description="repo.description"
+            :language="repo.language"
+            :languageColor="repo.languageColor"
+            :stars="repo.stars">
+          </repository>
         </li>
       </ul>
     </perfect-scrollbar>
@@ -50,6 +29,7 @@
 </template>
 <script>
 import axios from 'axios';
+import Repository from './Repository.vue';
 
 export default {
   name: 'Repositories',
@@ -68,6 +48,9 @@ export default {
       VUE_APP_DASHBOARD_SERVER_URL: process.env.VUE_APP_DASHBOARD_SERVER_URL,
     };
   },
+  components: {
+    repository: Repository,
+  },
   methods: {
     async getRepositories() {
       const path = `${this.VUE_APP_DASHBOARD_SERVER_URL}/v1/repositories`;
@@ -85,9 +68,6 @@ export default {
           console.error(error.message);
         });
     },
-    redirect(url) {
-      window.open(url, '_blank');
-    },
   },
   watch: {
     selected() {
@@ -103,9 +83,5 @@ export default {
     .repo {
       margin-top: 5px;
       margin-bottom: 5px;
-    }
-
-    .item:hover {
-      color: blue;
     }
 </style>

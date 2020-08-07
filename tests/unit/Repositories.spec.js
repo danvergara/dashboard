@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Repositories from '@/components/Repositories.vue';
 import axios from 'axios';
 
@@ -242,7 +242,7 @@ describe('Repositories.vue Test with successful HTTP GET', () => {
       },
     };
 
-    wrapper = shallowMount(Repositories, {
+    wrapper = mount(Repositories, {
       mocks: {
         $auth,
       },
@@ -305,7 +305,7 @@ describe('Implementation Test for Repositories.vue with Failed HTTP GET', () => 
       },
     };
 
-    wrapper = shallowMount(Repositories, {
+    wrapper = mount(Repositories, {
       mocks: {
         $auth,
       },
