@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import News from '@/components/News.vue';
 import axios from 'axios';
 
@@ -88,7 +88,7 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
       },
     };
 
-    wrapper = shallowMount(News, {
+    wrapper = mount(News, {
       mocks: {
         $auth,
       },
@@ -137,7 +137,7 @@ describe('Implementation Test for News.vue with Failed HTTP GET', () => {
       },
     };
 
-    wrapper = shallowMount(News, {
+    wrapper = mount(News, {
       mocks: {
         $auth,
       },

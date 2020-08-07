@@ -5,32 +5,22 @@
     <perfect-scrollbar>
       <ul class="list-unstyled">
         <li v-for="(item, x) in news" :key="x">
-          <b-card no-body>
-            <b-media tag="li" class="m-2 item"
-                              vertical-align="center"
-                              @click.stop.prevent="redirect(item.url)">
-              <template v-slot:aside>
-                <b-img :src="item.urlToImage" width="170" height="180" alt="Media Aside"></b-img>
-              </template>
-
-              <h5 class="mt-0 mb-1">{{item.title}}</h5>
-              <p><strong>Source: </strong>{{item.source.name}}<br>
-                <strong>Published at: </strong>{{toDateString(item.publishedAt)}}<br>
-                <strong v-if="item.author">Author: </strong>{{item.author}}
-              </p>
-              <p class="mb-0">
-                {{item.description}}
-              </p>
-            </b-media>
-          </b-card>
+          <news-item :url="item.url"
+                     :urlToImage="item.urlToImage"
+                     :title="item.title"
+                     :source="item.source.name"
+                     :publishedAt="item.publishedAt"
+                     :author="item.author"
+                     :description="item.description">
+          </news-item>
         </li>
       </ul>
     </perfect-scrollbar>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
+import NewsItem from './NewsItem.vue';
 
 export default {
   name: 'News',
@@ -39,6 +29,9 @@ export default {
       news: [],
       VUE_APP_DASHBOARD_SERVER_URL: process.env.VUE_APP_DASHBOARD_SERVER_URL,
     };
+  },
+  components: {
+    newsItem: NewsItem,
   },
   methods: {
     async getNews() {
@@ -55,20 +48,12 @@ export default {
           console.error(error.message);
         });
     },
-    redirect(url) {
-      window.open(url, '_blank');
-    },
-    toDateString(date) {
-      const dateObj = new Date(date);
-      return dateObj.toDateString();
-    },
   },
   created() {
     this.getNews();
   },
 };
 </script>
-
 <style lang="css">
   .item:hover {
     color: blue;
