@@ -65,6 +65,11 @@ export default {
         });
     },
   },
+  watch: {
+    selected() {
+      this.getNews();
+    },
+  },
   created() {
     this.getNews();
   },
