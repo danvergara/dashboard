@@ -105,6 +105,7 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(axios.get).toBeCalledWith(expect.stringMatching('/top-news'), {
       headers: { Authorization: 'Bearer fake-token' },
+      params: { category: 'business' },
     });
 
     // Check the news array is properly set
@@ -117,7 +118,7 @@ describe('Implementation test for News.vue with successful HTTP GET', () => {
     // Check that the news information is displayed
     expect(wrapper.findAll('li').length).toBeGreaterThan(1);
     expect(wrapper.findAll('b-media').length).toBeGreaterThan(1);
-    expect(wrapper.findAll('h5').at(1).text()).toMatch('Jeff Bezos publica una carta por el COVID-19');
+    expect(wrapper.findAll('h5').at(2).text()).toMatch('Jeff Bezos publica una carta por el COVID-19');
     expect(wrapper.findAll('p').at(0).text()).toContain('Merca20.com');
     expect(wrapper.findAll('p').at(0).text()).toContain('Verónica Malo Guzmán');
     expect(wrapper.findAll('p').at(0).text()).toContain('Sun Mar 22 2020');
@@ -153,6 +154,7 @@ describe('Implementation Test for News.vue with Failed HTTP GET', () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(axios.get).toBeCalledWith(expect.stringMatching('/top-news'), {
       headers: { Authorization: 'Bearer fake-token' },
+      params: { category: 'business' },
     });
 
     // Check that the length of the news array is 0
@@ -161,7 +163,7 @@ describe('Implementation Test for News.vue with Failed HTTP GET', () => {
     // Check that there is no news data displayed when the GET request fails
     expect(wrapper.findAll('li').length).toEqual(0);
     expect(wrapper.findAll('b-media').length).toEqual(0);
-    expect(wrapper.findAll('h5').length).toEqual(1);
+    expect(wrapper.findAll('h5').length).toEqual(2);
 
     expect(global.console.error).toHaveBeenCalledWith('BAD REQUEST');
   });
