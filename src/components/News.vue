@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="d-flex justify-content-center">Top News</h2>
+    <h5 class="d-flex justify-content-center"><b>Top News</b></h5>
     <br>
     <perfect-scrollbar>
       <ul class="list-unstyled">

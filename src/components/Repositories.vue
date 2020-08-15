@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="d-flex justify-content-center">Trending Repositories</h2>
+    <h5 class="d-flex justify-content-center"><b>Trending Repositories</b></h5>
     <br>
     <template>
       <div>

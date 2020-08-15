@@ -10,7 +10,7 @@
         <template v-slot:aside>
           <b-img :src="avatar" width="50" height="50" alt="Media Aside"></b-img>
         </template>
-        <b-card-text align="center">{{ description }}</b-card-text>
+        <b-card-text align="center" class="description">{{ description }}</b-card-text>
       </b-media>
       <template v-slot:footer>
         <small class="text-muted">
@@ -66,5 +66,9 @@ export default {
     .repo {
       margin-top: 5px;
       margin-bottom: 5px;
+    }
+
+    .description {
+      font-size: 15px;
     }
 </style>

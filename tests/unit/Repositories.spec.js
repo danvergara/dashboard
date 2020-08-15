@@ -330,7 +330,7 @@ describe('Implementation Test for Repositories.vue with Failed HTTP GET', () => 
     // Check that there is no news data displayed when the GET request fails
     expect(wrapper.findAll('li').length).toEqual(0);
     expect(wrapper.findAll('b-media').length).toEqual(0);
-    expect(wrapper.findAll('h5').length).toEqual(1);
+    expect(wrapper.findAll('h5').length).toEqual(2);
 
     expect(global.console.error).toHaveBeenCalledWith('BAD REQUEST');
   });
