@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="align-self-center">
+  <div>
     <h4>Ciudad de México, CDMX</h4>
     <p>{{ nowDateString() }}</p>
     <div class="row">
