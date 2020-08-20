@@ -81,7 +81,7 @@ describe('Displays the content passed as props', () => {
     wrapper.destroy();
   });
 
-  it('processes valid props data', () => {
+  it('validates props data', () => {
     // check that the prop data is stored as expected within the component
     expect(wrapper.vm.url).toMatch('https://github.com/hashicorp/vault');
     expect(wrapper.vm.author).toMatch('hashicorp');
@@ -92,7 +92,7 @@ describe('Displays the content passed as props', () => {
     expect(wrapper.vm.languageColor).toMatch('#00ADD8');
     expect(wrapper.vm.stars).toEqual(17212);
 
-    // Chec that the 8 fields for the Repository Item are displayed
+    // Check that the 8 fields for the Repository Item are displayed
     expect(wrapper.findAll('b-card-text').at(0).text()).toMatch('A tool for secrets management, encryption as a service, and privileged access management');
   });
 });
