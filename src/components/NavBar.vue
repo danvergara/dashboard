@@ -9,7 +9,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/finances">Finances</b-nav-item>
+          <b-nav-item href="/jobs">Jobs</b-nav-item>
           <b-nav-item href="/weather">Weather</b-nav-item>
         </b-navbar-nav>
 
